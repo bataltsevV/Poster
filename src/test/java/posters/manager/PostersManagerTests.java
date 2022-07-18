@@ -7,25 +7,24 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import poster.manager.PostersManager;
 
 public class PostersManagerTests {
-
     @ParameterizedTest
     @CsvFileSource(resources = "/DataForTestPostersManagerWithoutVariable.csv")
-    public void TestPostersManagerWithoutVariable(int expectedQtyLastFilm){
+    public void TestPostersManagerWithoutVariable(int expectedQtyLastFilm) {
         PostersManager postMag = new PostersManager();
         int actual = postMag.getQtyLastFilms();
-        Assertions.assertEquals(actual,expectedQtyLastFilm);
+        Assertions.assertEquals(actual, expectedQtyLastFilm);
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/DataForTestPostersManagerWithVariable.csv")
-    public void TestPostersManagerWthVariable(int expectedQtyLastFilm, int newQtyLastFilm){
+    public void TestPostersManagerWthVariable(int expectedQtyLastFilm, int newQtyLastFilm) {
         PostersManager postMag = new PostersManager(newQtyLastFilm);
         int actual = postMag.getQtyLastFilms();
-        Assertions.assertEquals(actual,expectedQtyLastFilm);
+        Assertions.assertEquals(actual, expectedQtyLastFilm);
     }
 
     @Test
-    public void TestAddNewFilmAndFindAll(){
+    public void TestAddNewFilmAndFindAll() {
         PostersManager postMag = new PostersManager();
         postMag.addNewFilm("Pirates");
         postMag.addNewFilm("Ghost");
@@ -35,7 +34,7 @@ public class PostersManagerTests {
         postMag.addNewFilm("Dragons");
         postMag.addNewFilm("Magic");
         postMag.addNewFilm("BeesLife");
-        String [] expected = {
+        String[] expected = {
                 "Pirates",
                 "Ghost",
                 "DogsLife",
@@ -45,12 +44,12 @@ public class PostersManagerTests {
                 "Magic",
                 "BeesLife"
         };
-        String [] actual = postMag.findAll();
-        Assertions.assertArrayEquals(actual,expected);
+        String[] actual = postMag.findAll();
+        Assertions.assertArrayEquals(actual, expected);
     }
 
     @Test
-    public void TestFindLastQtyFilmsMoreThenNeed(){
+    public void TestFindLastQtyFilmsMoreThenNeed() {
         PostersManager postMag = new PostersManager(5);
         postMag.addNewFilm("Pirates");
         postMag.addNewFilm("Ghost");
@@ -60,31 +59,31 @@ public class PostersManagerTests {
         postMag.addNewFilm("Dragons");
         postMag.addNewFilm("Magic");
         postMag.addNewFilm("BeesLife");
-        String [] expected = {
+        String[] expected = {
                 "BeesLife",
                 "Magic",
                 "Dragons",
                 "Hobits",
                 "CatsLife",
         };
-        String [] actual = postMag.findLast();
-        Assertions.assertArrayEquals(actual,expected);
+        String[] actual = postMag.findLast();
+        Assertions.assertArrayEquals(actual, expected);
     }
 
     @Test
-    public void TestFindLastQtyFilmsBelowNeed(){
+    public void TestFindLastQtyFilmsBelowNeed() {
         PostersManager postMag = new PostersManager(5);
         postMag.addNewFilm("Hobits");
         postMag.addNewFilm("Dragons");
         postMag.addNewFilm("Magic");
         postMag.addNewFilm("BeesLife");
-        String [] expected = {
+        String[] expected = {
                 "BeesLife",
                 "Magic",
                 "Dragons",
                 "Hobits",
         };
-        String [] actual = postMag.findLast();
-        Assertions.assertArrayEquals(actual,expected);
+        String[] actual = postMag.findLast();
+        Assertions.assertArrayEquals(actual, expected);
     }
 }
